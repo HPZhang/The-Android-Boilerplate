@@ -1,10 +1,14 @@
 package com.orcanote.boilerplate.presentation.presenter.impl;
 
+import com.orcanote.boilerplate.data.event.WelcomingEvent;
 import com.orcanote.boilerplate.data.model.Message;
+import com.orcanote.boilerplate.data.repository.WelcomingRepositoryImpl;
 import com.orcanote.boilerplate.domain.interactor.WelcomingInteractor;
 import com.orcanote.boilerplate.domain.interactor.impl.WelcomingInteractorImpl;
+import com.orcanote.boilerplate.domain.interactor.impl.WelcomingInteractorImpl2;
 import com.orcanote.boilerplate.presentation.presenter.MainPresenter;
 import com.orcanote.boilerplate.presentation.view.MainView;
+import com.orcanote.boilerplate.util.EventBusUtils;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -21,12 +25,12 @@ public class MainPresenterImpl implements MainPresenter, WelcomingInteractor.Cal
 
     @Override
     public void resume() {
-
+        EventBusUtils.register(this);
     }
 
     @Override
     public void pause() {
-
+        EventBusUtils.unregister(this);
     }
 
     @Override
@@ -39,7 +43,6 @@ public class MainPresenterImpl implements MainPresenter, WelcomingInteractor.Cal
         mView = null;
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
     @Override
     public void onError(String message) {
         mView.showError(message);
@@ -67,6 +70,11 @@ public class MainPresenterImpl implements MainPresenter, WelcomingInteractor.Cal
 
     @Override
     public void onClickPresentationAndDomainAndData() {
+        new WelcomingInteractorImpl2(new WelcomingRepositoryImpl()).execute();
+    }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(WelcomingEvent event) {
+        mView.showError(event.getMessage());
     }
 }

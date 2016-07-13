@@ -29,6 +29,20 @@ public class MainActivity extends AppCompatActivity implements MainView {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+
+        mPresenter.resume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        mPresenter.pause();
+    }
+
+    @Override
     public void onDestroy() {
         super.onDestroy();
 
@@ -48,5 +62,10 @@ public class MainActivity extends AppCompatActivity implements MainView {
     @OnClick(R.id.presentation_data)
     public void connectingPresentationAndData() {
         mPresenter.onClickPresentationAndData();
+    }
+
+    @OnClick(R.id.presentation_domain_data)
+    public void connectingPresentationAndDomainAndData() {
+        mPresenter.onClickPresentationAndDomainAndData();
     }
 }
