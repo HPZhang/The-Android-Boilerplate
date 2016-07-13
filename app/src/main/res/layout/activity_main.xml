@@ -28,7 +28,7 @@
         <FrameLayout android:layout_width="match_parent"
                      android:layout_height="56dp"
                      android:layout_marginTop="24dp"
-                     android:background="@color/accent"
+                     android:background="@drawable/accent"
                      android:id="@+id/presentation_domain">
 
             <TextView android:layout_width="wrap_content"
@@ -43,7 +43,7 @@
         <FrameLayout android:layout_width="match_parent"
                      android:layout_height="56dp"
                      android:layout_marginTop="24dp"
-                     android:background="@color/secondary_accent"
+                     android:background="@drawable/secondary_accent"
                      android:id="@+id/presentation_data">
 
             <TextView android:layout_width="wrap_content"
@@ -58,7 +58,7 @@
         <FrameLayout android:layout_width="match_parent"
                      android:layout_height="56dp"
                      android:layout_marginTop="24dp"
-                     android:background="@color/third_accent"
+                     android:background="@drawable/third_accent"
                      android:id="@+id/presentation_domain_data">
 
             <TextView android:layout_width="wrap_content"
