@@ -9,6 +9,9 @@ import com.orcanote.boilerplate.presentation.presenter.impl.MainPresenterImpl;
 import com.orcanote.boilerplate.presentation.view.MainView;
 import com.orcanote.boilerplate.ui.util.ToastUtils;
 
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 /**
  * @author orcanote
  */
@@ -20,6 +23,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
         super.onCreate(bundle);
 
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
         mPresenter = new MainPresenterImpl(this);
     }
@@ -34,5 +38,10 @@ public class MainActivity extends AppCompatActivity implements MainView {
     @Override
     public void showError(String message) {
         ToastUtils.showError(this, message);
+    }
+
+    @OnClick(R.id.presentation_domain)
+    public void connectingPresentationAndDomain() {
+        mPresenter.onClickPresentationAndDomain();
     }
 }
