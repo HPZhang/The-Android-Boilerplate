@@ -1,5 +1,6 @@
 package com.orcanote.boilerplate.presentation.presenter.impl;
 
+import com.orcanote.boilerplate.data.model.Message;
 import com.orcanote.boilerplate.domain.interactor.WelcomingInteractor;
 import com.orcanote.boilerplate.domain.interactor.impl.WelcomingInteractorImpl;
 import com.orcanote.boilerplate.presentation.presenter.MainPresenter;
@@ -61,7 +62,7 @@ public class MainPresenterImpl implements MainPresenter, WelcomingInteractor.Cal
 
     @Override
     public void onClickPresentationAndData() {
-
+        mView.showError(new Message().getMessage());
     }
 
     @Override

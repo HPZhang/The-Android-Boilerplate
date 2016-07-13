@@ -44,4 +44,9 @@ public class MainActivity extends AppCompatActivity implements MainView {
     public void connectingPresentationAndDomain() {
         mPresenter.onClickPresentationAndDomain();
     }
+
+    @OnClick(R.id.presentation_data)
+    public void connectingPresentationAndData() {
+        mPresenter.onClickPresentationAndData();
+    }
 }
