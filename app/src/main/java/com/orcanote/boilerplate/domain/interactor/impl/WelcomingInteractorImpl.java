@@ -11,10 +11,6 @@ public class WelcomingInteractorImpl implements WelcomingInteractor {
 
     @Override
     public void execute() {
-        if (Math.round(Math.random()) % 2 == 0) {
-            callback.onSuccess("Succeeds to get message");
-        } else {
-            callback.onSuccess("Fails to get message");
-        }
+        callback.onSuccess("Succeeds to get message");
     }
 }

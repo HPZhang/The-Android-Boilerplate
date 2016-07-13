@@ -12,6 +12,6 @@ public class WelcomingInteractorImpl2 implements WelcomingInteractor {
 
     @Override
     public void execute() {
-        repository.post();
+        repository.getMessage();
     }
 }

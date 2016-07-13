@@ -7,7 +7,7 @@ import com.orcanote.boilerplate.domain.repository.WelcomingRepository;
 public class WelcomingRepositoryImpl implements WelcomingRepository {
 
     @Override
-    public void post() {
+    public void getMessage() {
         AndroidApplication.getJobManager().addJobInBackground(new WelcomingJob());
     }
 }
