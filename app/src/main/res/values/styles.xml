@@ -1,6 +1,7 @@
 <resources>
 
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-    </style>
+    <!-- start theme -->
+    <style name="Theme" parent="Theme.AppCompat.NoActionBar"></style>
+    <!-- end theme -->
 
 </resources>

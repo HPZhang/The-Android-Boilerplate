@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">TheAndroidBoilerplate</string>
+    <string name="app_name">The Android Boilerplate</string>
+
+    <string name="btn_presentation_domain">Presentation and Domain</string>
+    <string name="btn_presentation_data">Presentation and Data</string>
+    <string name="btn_presentation_domain_data">Presentation、Domain、Data</string>
 </resources>
