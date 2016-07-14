@@ -68,4 +68,9 @@ public class MainActivity extends AppCompatActivity implements MainView {
     public void connectingPresentationAndDomainAndData() {
         mPresenter.onClickPresentationAndDomainAndData();
     }
+
+    @OnClick(R.id.getting_images)
+    public void gettingImages() {
+        mPresenter.onClickGettingImages();
+    }
 }

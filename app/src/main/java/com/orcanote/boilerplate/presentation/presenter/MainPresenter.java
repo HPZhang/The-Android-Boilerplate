@@ -7,4 +7,6 @@ public interface MainPresenter extends BasePresenter {
     void onClickPresentationAndData();
 
     void onClickPresentationAndDomainAndData();
+
+    void onClickGettingImages();
 }
