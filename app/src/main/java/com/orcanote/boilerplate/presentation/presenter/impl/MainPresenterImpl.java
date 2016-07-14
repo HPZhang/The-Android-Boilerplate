@@ -1,8 +1,11 @@
 package com.orcanote.boilerplate.presentation.presenter.impl;
 
 import com.orcanote.boilerplate.data.event.WelcomingEvent;
+import com.orcanote.boilerplate.data.model.Image;
 import com.orcanote.boilerplate.data.model.Message;
+import com.orcanote.boilerplate.data.repository.GettingImagesRepositoryImpl;
 import com.orcanote.boilerplate.data.repository.WelcomingRepositoryImpl;
+import com.orcanote.boilerplate.domain.interactor.GettingImagesInteractor;
 import com.orcanote.boilerplate.domain.interactor.WelcomingInteractor;
 import com.orcanote.boilerplate.domain.interactor.impl.WelcomingInteractorImpl;
 import com.orcanote.boilerplate.domain.interactor.impl.WelcomingInteractorImpl2;
@@ -12,6 +15,8 @@ import com.orcanote.boilerplate.util.EventBusUtils;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
+import java.util.List;
 
 /**
  * @author orcanote
@@ -73,8 +78,18 @@ public class MainPresenterImpl implements MainPresenter, WelcomingInteractor.Cal
         new WelcomingInteractorImpl2(new WelcomingRepositoryImpl()).execute();
     }
 
+    @Override
+    public void onClickGettingImages() {
+        new GettingImagesInteractor(new GettingImagesRepositoryImpl()).execute();
+    }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(WelcomingEvent event) {
         mView.showError(event.getMessage());
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(List<Image> images) {
+        mView.showError("The number of images is " + images.size() + ".");
     }
 }
