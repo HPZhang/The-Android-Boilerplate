@@ -3,14 +3,17 @@ package com.orcanote.boilerplate.domain.interactor.impl;
 import com.orcanote.boilerplate.domain.interactor.WelcomingInteractor;
 
 public class WelcomingInteractorImpl implements WelcomingInteractor {
-    private Callback callback;
+
+    private Callback mCallback;
 
     public WelcomingInteractorImpl(Callback callback) {
-        this.callback = callback;
+        mCallback = callback;
     }
 
     @Override
     public void execute() {
-        callback.onSuccess("Succeeds to get message");
+        mCallback.onSuccess("Succeeds to get message");
+
+        mCallback = null;
     }
 }

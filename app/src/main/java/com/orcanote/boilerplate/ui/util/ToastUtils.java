@@ -9,22 +9,22 @@ import android.widget.Toast;
  */
 public class ToastUtils {
 
-  private ToastUtils() {
-  }
+    private ToastUtils() {
+    }
 
-  public static void showError(Context context, String message) {
-    getToast(context, message).show();
-  }
+    public static void showMessage(Context context, String message) {
+        getToast(context, message).show();
+    }
 
-  public static void showShortMessage(Context context, String message) {
-    getToast(context, message, Toast.LENGTH_SHORT).show();
-  }
+    public static void showShortMessage(Context context, String message) {
+        getToast(context, message, Toast.LENGTH_SHORT).show();
+    }
 
-  private static Toast getToast(Context context, String message) {
-    return getToast(context, message, Toast.LENGTH_LONG);
-  }
+    private static Toast getToast(Context context, String message) {
+        return getToast(context, message, Toast.LENGTH_LONG);
+    }
 
-  private static Toast getToast(Context context, String message, int length) {
-    return Toast.makeText(context, message, length);
-  }
+    private static Toast getToast(Context context, String message, int length) {
+        return Toast.makeText(context, message, length);
+    }
 }

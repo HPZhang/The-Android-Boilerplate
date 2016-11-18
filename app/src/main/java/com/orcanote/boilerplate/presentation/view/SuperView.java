@@ -5,7 +5,9 @@ package com.orcanote.boilerplate.presentation.view;
  * 所有视图组件必须实现的接口
  * </p>
  */
-public interface BaseView {
+public interface SuperView {
+
+    void showMessage(String message);
 
     /**
      * 在交互过程中，如果出现错误，使用这个工具显示错误的提示信息

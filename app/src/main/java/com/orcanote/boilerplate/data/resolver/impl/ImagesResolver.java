@@ -72,10 +72,7 @@ public class ImagesResolver extends BaseResolver<Image> {
         return context.getContentResolver().query(
             MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
             projection,
-            new StringBuilder().append(projection[5]).append(" > 0 AND ")
-                               .append(projection[4]).append(" = ? OR ")
-                               .append(projection[4]).append(" = ?")
-                               .toString(),
+            projection[5] + " > 0 AND " + projection[4] + " = ? OR " + projection[4] + " = ?",
             new String[]{ "image/jpeg", "image/png" },
             projection[2] + " DESC"
         );

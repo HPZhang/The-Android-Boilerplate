@@ -1,51 +1,62 @@
 package com.orcanote.boilerplate.presentation.presenter.impl;
 
-import com.orcanote.boilerplate.data.event.WelcomingEvent;
 import com.orcanote.boilerplate.data.model.Image;
-import com.orcanote.boilerplate.data.model.Message;
-import com.orcanote.boilerplate.data.repository.GettingImagesRepositoryImpl;
-import com.orcanote.boilerplate.data.repository.WelcomingRepositoryImpl;
-import com.orcanote.boilerplate.domain.interactor.GettingImagesInteractor;
+import com.orcanote.boilerplate.domain.executor.BackgroundExecutor;
+import com.orcanote.boilerplate.domain.executor.MainExecutor;
 import com.orcanote.boilerplate.domain.interactor.WelcomingInteractor;
+import com.orcanote.boilerplate.domain.interactor.impl.BackgroundInteractorImpl;
+import com.orcanote.boilerplate.domain.interactor.impl.GettingImagesInteractorImpl;
 import com.orcanote.boilerplate.domain.interactor.impl.WelcomingInteractorImpl;
 import com.orcanote.boilerplate.domain.interactor.impl.WelcomingInteractorImpl2;
+import com.orcanote.boilerplate.domain.repository.GettingImagesRepository;
+import com.orcanote.boilerplate.domain.repository.WelcomingRepository;
 import com.orcanote.boilerplate.presentation.presenter.MainPresenter;
 import com.orcanote.boilerplate.presentation.view.MainView;
-import com.orcanote.boilerplate.util.EventBusUtils;
-
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 
 /**
  * @author orcanote
  */
-public class MainPresenterImpl implements MainPresenter, WelcomingInteractor.Callback {
-    private MainView mView;
+public class MainPresenterImpl implements MainPresenter,
+                                          WelcomingInteractor.Callback,
+                                          BackgroundInteractorImpl.Callback {
 
-    public MainPresenterImpl(MainView view) {
+    private MainView                mView;
+    private WelcomingRepository     mWelcomingRepository;
+    private GettingImagesRepository mGettingImagesRepository;
+    private MainExecutor            mMainExecutor;
+    private BackgroundExecutor      mBackgroundExecutor;
+
+    public MainPresenterImpl(MainView view,
+                             WelcomingRepository welcomingRepository,
+                             GettingImagesRepository gettingImagesRepository,
+                             MainExecutor mainExecutor,
+                             BackgroundExecutor backgroundExecutor) {
         mView = view;
+        mWelcomingRepository = welcomingRepository;
+        mGettingImagesRepository = gettingImagesRepository;
+        mMainExecutor = mainExecutor;
+        mBackgroundExecutor = backgroundExecutor;
     }
 
     @Override
     public void resume() {
-        EventBusUtils.register(this);
     }
 
     @Override
     public void pause() {
-        EventBusUtils.unregister(this);
     }
 
     @Override
     public void stop() {
-
     }
 
     @Override
     public void destroy() {
         mView = null;
+        mWelcomingRepository = null;
+        mGettingImagesRepository = null;
     }
 
     @Override
@@ -55,7 +66,7 @@ public class MainPresenterImpl implements MainPresenter, WelcomingInteractor.Cal
 
     @Override
     public void onSuccess(String message) {
-        mView.showError(message);
+        mView.showMessage(message);
     }
 
     @Override
@@ -64,32 +75,42 @@ public class MainPresenterImpl implements MainPresenter, WelcomingInteractor.Cal
     }
 
     @Override
-    public void onClickPresentationAndDomain() {
+    public void onPresentationAndDomainClick() {
         new WelcomingInteractorImpl(this).execute();
     }
 
     @Override
-    public void onClickPresentationAndData() {
-        mView.showError(new Message().getMessage());
+    public void onPresentationAndDataClick() {
+        mView.showMessage("Welcome to Android Boilerplate.");
     }
 
     @Override
-    public void onClickPresentationAndDomainAndData() {
-        new WelcomingInteractorImpl2(new WelcomingRepositoryImpl()).execute();
+    public void onPresentationAndDomainAndDataClick() {
+        new WelcomingInteractorImpl2(mWelcomingRepository).execute();
     }
 
     @Override
-    public void onClickGettingImages() {
-        new GettingImagesInteractor(new GettingImagesRepositoryImpl()).execute();
+    public void onGettingImagesClick() {
+        new GettingImagesInteractorImpl(mGettingImagesRepository).execute();
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEvent(WelcomingEvent event) {
-        mView.showError(event.getMessage());
+    @Override
+    public void onAppStarted(String message) {
+        mView.showMessage(message);
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEvent(List<Image> images) {
-        mView.showError("The number of images is " + images.size() + ".");
+    @Override
+    public void onBackgroundInteractorClick() {
+        new BackgroundInteractorImpl(mMainExecutor, mBackgroundExecutor, this).execute();
+    }
+
+    @Override
+    public void onImagesGetted(List<Image> images) {
+        mView.showMessage("The number of images is " + images.size() + ".");
+    }
+
+    @Override
+    public void onBackgroundInteractorCompleted(String message) {
+        mView.showMessage(message);
     }
 }

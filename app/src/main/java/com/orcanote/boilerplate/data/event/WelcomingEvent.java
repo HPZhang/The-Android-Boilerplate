@@ -1,6 +1,6 @@
 package com.orcanote.boilerplate.data.event;
 
-public class WelcomingEvent {
+public class WelcomingEvent implements BaseEvent {
     private String message;
 
     public WelcomingEvent(String message) {
@@ -9,5 +9,10 @@ public class WelcomingEvent {
 
     public String getMessage() {
         return message;
+    }
+
+    @Override
+    public void destroy() {
+        message = null;
     }
 }

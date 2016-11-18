@@ -1,12 +1,22 @@
 package com.orcanote.boilerplate.presentation.presenter;
 
+import com.orcanote.boilerplate.data.model.Image;
+
+import java.util.List;
+
 public interface MainPresenter extends BasePresenter {
 
-    void onClickPresentationAndDomain();
+    void onPresentationAndDomainClick();
 
-    void onClickPresentationAndData();
+    void onPresentationAndDataClick();
 
-    void onClickPresentationAndDomainAndData();
+    void onPresentationAndDomainAndDataClick();
 
-    void onClickGettingImages();
+    void onGettingImagesClick();
+
+    void onAppStarted(String message);
+
+    void onBackgroundInteractorClick();
+
+    void onImagesGetted(List<Image> images);
 }

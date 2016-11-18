@@ -85,6 +85,23 @@
 
         </FrameLayout>
 
+
+
+        <FrameLayout android:layout_width="match_parent"
+                     android:layout_height="56dp"
+                     android:layout_marginTop="24dp"
+                     android:background="@drawable/accent"
+                     android:id="@+id/background_interactor">
+
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_gravity="center"
+                      android:textSize="18sp"
+                      android:textColor="@color/icons"
+                      android:text="@string/btn_background_interactor"/>
+
+        </FrameLayout>
+
     </LinearLayout>
 
 </RelativeLayout>

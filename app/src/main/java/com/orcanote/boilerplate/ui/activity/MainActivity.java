@@ -1,13 +1,23 @@
 package com.orcanote.boilerplate.ui.activity;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 
 import com.orcanote.boilerplate.R;
+import com.orcanote.boilerplate.data.event.WelcomingEvent;
+import com.orcanote.boilerplate.data.model.Image;
+import com.orcanote.boilerplate.data.repository.GettingImagesRepositoryImpl;
+import com.orcanote.boilerplate.data.repository.WelcomingRepositoryImpl;
 import com.orcanote.boilerplate.presentation.presenter.MainPresenter;
 import com.orcanote.boilerplate.presentation.presenter.impl.MainPresenterImpl;
 import com.orcanote.boilerplate.presentation.view.MainView;
-import com.orcanote.boilerplate.ui.util.ToastUtils;
+import com.orcanote.boilerplate.threading.BackgroundExecutorImpl;
+import com.orcanote.boilerplate.threading.MainExecutorImpl;
+import com.orcanote.boilerplate.util.EventBusUtils;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
+import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -15,7 +25,8 @@ import butterknife.OnClick;
 /**
  * @author orcanote
  */
-public class MainActivity extends AppCompatActivity implements MainView {
+public class MainActivity extends SuperActivity implements MainView {
+
     private MainPresenter mPresenter;
 
     @Override
@@ -23,9 +34,18 @@ public class MainActivity extends AppCompatActivity implements MainView {
         super.onCreate(bundle);
 
         setContentView(R.layout.activity_main);
+
         ButterKnife.bind(this);
 
-        mPresenter = new MainPresenterImpl(this);
+        mPresenter = new MainPresenterImpl(
+            this,
+            new WelcomingRepositoryImpl(),
+            new GettingImagesRepositoryImpl(),
+            MainExecutorImpl.getInstance(),
+            BackgroundExecutorImpl.getInstance()
+        );
+
+        EventBusUtils.register(this);
     }
 
     @Override
@@ -46,31 +66,43 @@ public class MainActivity extends AppCompatActivity implements MainView {
     public void onDestroy() {
         super.onDestroy();
 
-        mPresenter.destroy();
-    }
+        EventBusUtils.unregister(this);
 
-    @Override
-    public void showError(String message) {
-        ToastUtils.showError(this, message);
+        mPresenter.destroy();
     }
 
     @OnClick(R.id.presentation_domain)
     public void connectingPresentationAndDomain() {
-        mPresenter.onClickPresentationAndDomain();
+        mPresenter.onPresentationAndDomainClick();
     }
 
     @OnClick(R.id.presentation_data)
     public void connectingPresentationAndData() {
-        mPresenter.onClickPresentationAndData();
+        mPresenter.onPresentationAndDataClick();
     }
 
     @OnClick(R.id.presentation_domain_data)
     public void connectingPresentationAndDomainAndData() {
-        mPresenter.onClickPresentationAndDomainAndData();
+        mPresenter.onPresentationAndDomainAndDataClick();
     }
 
     @OnClick(R.id.getting_images)
     public void gettingImages() {
-        mPresenter.onClickGettingImages();
+        mPresenter.onGettingImagesClick();
+    }
+
+    @OnClick(R.id.background_interactor)
+    public void onBackgroundInteractorClick() {
+        mPresenter.onBackgroundInteractorClick();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(WelcomingEvent event) {
+        mPresenter.onAppStarted(event.getMessage());
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(List<Image> images) {
+        mPresenter.onImagesGetted(images);
     }
 }

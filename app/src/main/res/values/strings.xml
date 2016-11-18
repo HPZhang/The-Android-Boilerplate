@@ -5,4 +5,5 @@
     <string name="btn_presentation_data">Presentation and Data</string>
     <string name="btn_presentation_domain_data">Presentation、Domain、Data</string>
     <string name="btn_getting_images">Getting Images</string>
+    <string name="btn_background_interactor">Background Interactor</string>
 </resources>

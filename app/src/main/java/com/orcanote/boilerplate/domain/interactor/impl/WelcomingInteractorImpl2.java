@@ -4,14 +4,17 @@ import com.orcanote.boilerplate.domain.interactor.WelcomingInteractor;
 import com.orcanote.boilerplate.domain.repository.WelcomingRepository;
 
 public class WelcomingInteractorImpl2 implements WelcomingInteractor {
-    private WelcomingRepository repository;
+
+    private WelcomingRepository mRepository;
 
     public WelcomingInteractorImpl2(WelcomingRepository repository) {
-        this.repository = repository;
+        mRepository = repository;
     }
 
     @Override
     public void execute() {
-        repository.getMessage();
+        mRepository.getMessage();
+
+        mRepository = null;
     }
 }
