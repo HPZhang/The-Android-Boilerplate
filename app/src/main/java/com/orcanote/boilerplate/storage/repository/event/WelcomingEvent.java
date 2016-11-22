@@ -1,4 +1,4 @@
-package com.orcanote.boilerplate.data.event;
+package com.orcanote.boilerplate.storage.repository.event;
 
 public class WelcomingEvent implements BaseEvent {
     private String message;

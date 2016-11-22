@@ -1,9 +1,9 @@
-package com.orcanote.boilerplate.data.util;
+package com.orcanote.boilerplate.storage.data.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.orcanote.boilerplate.AndroidApplication;
+import com.orcanote.boilerplate.storage.data.ContextHolder;
 
 /**
  * @author orcanote
@@ -33,6 +33,7 @@ public class PreferUtils {
     }
 
     private static SharedPreferences sharedPreferences(String fileName) {
-        return AndroidApplication.getInstance().getSharedPreferences(fileName, Context.MODE_PRIVATE);
+        return ContextHolder.getApplicationContext()
+                            .getSharedPreferences(fileName, Context.MODE_PRIVATE);
     }
 }

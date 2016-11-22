@@ -1,4 +1,4 @@
-package com.orcanote.boilerplate.data.util;
+package com.orcanote.boilerplate.storage.data.util;
 
 import java.security.NoSuchAlgorithmException;
 

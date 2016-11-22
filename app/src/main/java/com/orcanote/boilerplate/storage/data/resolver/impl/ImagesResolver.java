@@ -1,11 +1,11 @@
-package com.orcanote.boilerplate.data.resolver.impl;
+package com.orcanote.boilerplate.storage.data.resolver.impl;
 
 import android.content.Context;
 import android.database.Cursor;
 import android.provider.MediaStore;
 
-import com.orcanote.boilerplate.data.model.Image;
-import com.orcanote.boilerplate.data.resolver.BaseResolver;
+import com.orcanote.boilerplate.storage.data.model.Image;
+import com.orcanote.boilerplate.storage.data.resolver.BaseResolver;
 
 import java.util.List;
 

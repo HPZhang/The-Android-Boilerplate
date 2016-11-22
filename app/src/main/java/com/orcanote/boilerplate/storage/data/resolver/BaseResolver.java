@@ -1,4 +1,4 @@
-package com.orcanote.boilerplate.data.resolver;
+package com.orcanote.boilerplate.storage.data.resolver;
 
 import android.database.Cursor;
 

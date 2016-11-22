@@ -1,6 +1,6 @@
 package com.orcanote.boilerplate.presentation.presenter.impl;
 
-import com.orcanote.boilerplate.data.model.Image;
+import com.orcanote.boilerplate.storage.data.model.Image;
 import com.orcanote.boilerplate.domain.executor.BackgroundExecutor;
 import com.orcanote.boilerplate.domain.executor.MainExecutor;
 import com.orcanote.boilerplate.domain.interactor.WelcomingInteractor;

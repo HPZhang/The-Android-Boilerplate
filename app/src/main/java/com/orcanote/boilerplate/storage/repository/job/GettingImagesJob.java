@@ -1,4 +1,4 @@
-package com.orcanote.boilerplate.data.job;
+package com.orcanote.boilerplate.storage.repository.job;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -6,8 +6,9 @@ import android.support.annotation.Nullable;
 import com.birbit.android.jobqueue.Job;
 import com.birbit.android.jobqueue.Params;
 import com.birbit.android.jobqueue.RetryConstraint;
-import com.orcanote.boilerplate.data.resolver.impl.ImagesResolver;
-import com.orcanote.boilerplate.util.EventBusUtils;
+import com.orcanote.boilerplate.storage.data.resolver.impl.ImagesResolver;
+
+import org.greenrobot.eventbus.EventBus;
 
 public class GettingImagesJob extends Job {
 
@@ -21,7 +22,7 @@ public class GettingImagesJob extends Job {
 
     @Override
     public void onRun() throws Throwable {
-        EventBusUtils.post(new ImagesResolver(getApplicationContext()).query());
+        EventBus.getDefault().post(new ImagesResolver(getApplicationContext()).query());
     }
 
     @Override

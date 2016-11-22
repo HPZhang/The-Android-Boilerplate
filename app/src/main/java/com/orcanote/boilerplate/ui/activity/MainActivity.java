@@ -3,17 +3,17 @@ package com.orcanote.boilerplate.ui.activity;
 import android.os.Bundle;
 
 import com.orcanote.boilerplate.R;
-import com.orcanote.boilerplate.data.event.WelcomingEvent;
-import com.orcanote.boilerplate.data.model.Image;
-import com.orcanote.boilerplate.data.repository.GettingImagesRepositoryImpl;
-import com.orcanote.boilerplate.data.repository.WelcomingRepositoryImpl;
 import com.orcanote.boilerplate.presentation.presenter.MainPresenter;
 import com.orcanote.boilerplate.presentation.presenter.impl.MainPresenterImpl;
 import com.orcanote.boilerplate.presentation.view.MainView;
+import com.orcanote.boilerplate.storage.data.model.Image;
+import com.orcanote.boilerplate.storage.repository.GettingImagesRepositoryImpl;
+import com.orcanote.boilerplate.storage.repository.WelcomingRepositoryImpl;
+import com.orcanote.boilerplate.storage.repository.event.WelcomingEvent;
 import com.orcanote.boilerplate.threading.BackgroundExecutorImpl;
 import com.orcanote.boilerplate.threading.MainExecutorImpl;
-import com.orcanote.boilerplate.util.EventBusUtils;
 
+import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
@@ -45,7 +45,7 @@ public class MainActivity extends SuperActivity implements MainView {
             BackgroundExecutorImpl.getInstance()
         );
 
-        EventBusUtils.register(this);
+        EventBus.getDefault().register(this);
     }
 
     @Override
@@ -66,7 +66,7 @@ public class MainActivity extends SuperActivity implements MainView {
     public void onDestroy() {
         super.onDestroy();
 
-        EventBusUtils.unregister(this);
+        EventBus.getDefault().unregister(this);
 
         mPresenter.destroy();
     }

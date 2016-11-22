@@ -1,4 +1,4 @@
-package com.orcanote.boilerplate.data.job;
+package com.orcanote.boilerplate.storage.repository.job;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -6,8 +6,9 @@ import android.support.annotation.Nullable;
 import com.birbit.android.jobqueue.Job;
 import com.birbit.android.jobqueue.Params;
 import com.birbit.android.jobqueue.RetryConstraint;
-import com.orcanote.boilerplate.data.event.WelcomingEvent;
-import com.orcanote.boilerplate.util.EventBusUtils;
+import com.orcanote.boilerplate.storage.repository.event.WelcomingEvent;
+
+import org.greenrobot.eventbus.EventBus;
 
 public class WelcomingJob extends Job {
     public WelcomingJob() {
@@ -16,12 +17,12 @@ public class WelcomingJob extends Job {
 
     @Override
     public void onAdded() {
-        EventBusUtils.post(new WelcomingEvent("Starting job."));
+        EventBus.getDefault().post(new WelcomingEvent("Starting job."));
     }
 
     @Override
     public void onRun() throws Throwable {
-        EventBusUtils.post(new WelcomingEvent("Running job."));
+        EventBus.getDefault().post(new WelcomingEvent("Running job."));
     }
 
     @Override

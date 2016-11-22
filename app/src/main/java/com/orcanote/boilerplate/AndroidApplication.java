@@ -6,6 +6,7 @@ import android.util.Log;
 import com.birbit.android.jobqueue.JobManager;
 import com.birbit.android.jobqueue.config.Configuration;
 import com.birbit.android.jobqueue.log.CustomLogger;
+import com.orcanote.boilerplate.storage.data.ContextHolder;
 import com.raizlabs.android.dbflow.config.FlowConfig;
 import com.raizlabs.android.dbflow.config.FlowManager;
 
@@ -26,10 +27,7 @@ public class AndroidApplication extends Application {
 
         configureJobManager();
         configureFlowManager();
-    }
-
-    public static AndroidApplication getInstance() {
-        return instance;
+        ContextHolder.inject(this);
     }
 
     public static JobManager getJobManager() {

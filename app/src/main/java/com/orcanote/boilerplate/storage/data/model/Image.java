@@ -1,4 +1,4 @@
-package com.orcanote.boilerplate.data.model;
+package com.orcanote.boilerplate.storage.data.model;
 
 public class Image {
     private String  path;

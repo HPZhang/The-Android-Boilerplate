@@ -1,6 +1,6 @@
 package com.orcanote.boilerplate.presentation.presenter;
 
-import com.orcanote.boilerplate.data.model.Image;
+import com.orcanote.boilerplate.storage.data.model.Image;
 
 import java.util.List;
 
