@@ -1,16 +1,21 @@
-layers from outside to inside:
-    ui -> presentation -> storage(repository -> data) -> domain
+# Overview
 
-User Request Data flow :
-    ui -> presentation -> domain -> storage
-    ui -> presentation           -> storage
-    
-App Response Data flow : 
-    storage -> domain -> presentation -> ui
-    storage           -> presentation -> ui
-            
-Let ui listen to all events from os or library.
+This is starter template for writing Android apps using **Clean architecture**.
 
-Using android-priority-jobqueue to perform async task, for example: read data from remote server or local.
+This app supports **API 15 and above**.
 
-Using background interactor to do complex business.
+## Layers from outside to inside
+
+1. ui : ui self and relative tools.
+2. presentation : ui logic of interaction and domain connector.
+3. repository : data interface and mapping data
+3. data : managing data, Caching data, Encrypting data...
+4. domain : Business rule.
+
+## Data flow from outside to inside
+
+ui **->** presentation **->** domain **->** storage(repository **->** data)
+
+## Data flow from inside to outside
+
+storage(repository **->** data) **->** domain **->** presentation **->** ui
